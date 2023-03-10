@@ -15,7 +15,7 @@ Usage:
 Options:
   -p PORT, --port=PORT                 Listen on this port [default: 8000]
   -h HOST_IP, --host=HOST_IP           Listen on this IP address [default: 127.0.0.1]
-  -r, --reload                         Reaload the application
+  -r, --reload                         Reload the application
 """
     args = docopt(help_doc)    
             
