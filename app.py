@@ -1,6 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
+from routes.posts_routes import router
 
 app = FastAPI()
+
+app.include_router(router)
 
 def main():
     import uvicorn
