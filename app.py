@@ -1,11 +1,20 @@
 from fastapi import FastAPI, Depends, HTTPException
-from routes.post_routes import router
+from routes import review_routes, post_routes
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(post_routes.router)
+app.include_router(review_routes.router)
 
 def main():
+    # config_routes()
+    start_uvicorn()
+
+# def config_routes():
+#     for rtr in [review_routes, post_routes]:
+#         app.include_router(rtr.router)
+
+def start_uvicorn():
     import uvicorn
     from docopt import docopt
 
