@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
-from routes.posts_routes import router
+from routes.post_routes import router
 
 app = FastAPI()
 
