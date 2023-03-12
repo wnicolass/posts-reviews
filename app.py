@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from routes import review_routes, post_routes
+from config.database import create_metadata
 
 app = FastAPI()
 
@@ -26,11 +27,15 @@ Usage:
 
 Options:
   -p PORT, --port=PORT                 Listen on this port [default: 8000]
+  -c, --create-ddl                     Create datamodel in the database
   -h HOST_IP, --host=HOST_IP           Listen on this IP address [default: 127.0.0.1]
   -r, --reload                         Reload the application
 """
     args = docopt(help_doc)    
-            
+    create_ddl = args['--create-ddl']
+    if create_ddl:
+        create_metadata()
+
     uvicorn.run(
         'app:app', 
         port = int(args['--port']),
