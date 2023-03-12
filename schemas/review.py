@@ -2,9 +2,10 @@ from pydantic import BaseModel
 from decimal import Decimal as dec
 
 class ReviewBase(BaseModel):
-    reviewer_id: int
     rating: dec
     content: str
+    reviewer_id: int
+    post_id: int
 
 class ReviewResult(ReviewBase):
     id: int
