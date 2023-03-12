@@ -11,5 +11,7 @@ SessionLocal = sessionmaker(autocommit = False, autoflush = False, bind = engine
 Base = declarative_base()
 
 def create_metadata():
+    import models.__all_models
+    
     Base.metadata.drop_all(bind=engine)  
     Base.metadata.create_all(bind=engine)
