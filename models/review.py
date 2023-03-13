@@ -19,4 +19,4 @@ class Review(Base):
     post_id = Column(Integer, ForeignKey('posts.id'), nullable = False)
     created_at = Column(DateTime, default = datetime.now())
 
-    post = relationship('Post', back_populates = 'reviews')
+    post = relationship('Post', back_populates = 'related_reviews')
