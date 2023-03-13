@@ -17,5 +17,6 @@ class Review(Base):
     rating = Column(DECIMAL(3, 1), nullable = False)
     content = Column(String(255), nullable = False)
     post_id = Column(Integer, ForeignKey('posts.id'), nullable = False)
+    created_at = Column(DateTime, default = datetime.now())
 
     post = relationship('Post', back_populates = 'reviews')
