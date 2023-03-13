@@ -1,18 +1,19 @@
-from fastapi import APIRouter
-from schemas.post import PostBase, PostResult
+from fastapi import APIRouter, Depends
 from typing import List
+from sqlalchemy.orm import Session
+
+from schemas.post import PostBase, PostResult
+from utils.db_session import get_db_session
+from services import post_service
 
 router = APIRouter()
 
-@router.post('/posts')
-async def create_post(post: PostBase) -> PostResult:
-    dummy_data = {
-        "id": 1,
-        "title": post.title,
-        "summary": post.summary,
-        "content": post.content
-    }
-    return dummy_data
+@router.post('/posts', response_model = PostResult)
+async def create_post(post: PostBase, session: Session = Depends(get_db_session)):
+    inserted_data = post_service.create_post(post, session)
+    if not inserted_data:
+        return 'something went wrong'
+    return inserted_data
 
 @router.get('/posts')
 async def get_posts() -> List[PostResult]:

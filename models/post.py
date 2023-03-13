@@ -7,6 +7,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from config.database import Base
+from models.review import Review
 
 class Post(Base):
     __tablename__ = 'posts'
@@ -17,4 +18,4 @@ class Post(Base):
     content = Column(String(255), nullable = False)
     created_at = Column(DateTime, default = datetime.now())
 
-    reviews = relationship('Review', back_populates = 'post')
+    related_reviews = relationship('Review', back_populates = 'post')
