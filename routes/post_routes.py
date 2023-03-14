@@ -14,7 +14,7 @@ async def create_post(post: PostBase, session: Session = Depends(get_db_session)
     if not inserted_data:
         raise HTTPException(
             status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, 
-            detail = {'error': 'Something went wrong! While connecting to the database.'}
+            detail = {'error': 'Something went wrong while connecting to the database.'}
         )
     return inserted_data
 
@@ -22,3 +22,23 @@ async def create_post(post: PostBase, session: Session = Depends(get_db_session)
 async def get_posts(session: Session = Depends(get_db_session)) -> List[PostResult]:
     posts = post_service.get_posts(session)
     return posts
+
+@router.put('/posts/{post_id}', response_model = PostResult, status_code = status.HTTP_200_OK)
+async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)):
+    if not post_id:
+        raise HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST, 
+            detail = {'error': 'Missing id!'}
+        )
+
+    post = post_service.get_post_by_id(session, post_id)
+
+    if not post:
+        raise HTTPException(
+            status_code = status.HTTP_404_NOT_FOUND, 
+            detail = {'error': 'Post does not exist!'}
+        )
+    
+    updated_post = post_service.update_post(session, post, new_post_data)
+
+    return updated_post
