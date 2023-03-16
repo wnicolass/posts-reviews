@@ -42,3 +42,23 @@ async def update_post(post_id: int, new_post_data: PostBase, session: Session = 
     updated_post = post_service.update_post(session, post, new_post_data)
 
     return updated_post
+
+@router.delete('/posts/{post_id}', status_code = status.HTTP_200_OK)
+async def delete_post(post_id: int, session: Session = Depends(get_db_session)) -> None:
+    if not post_id:
+        raise HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST, 
+            detail = {'error': 'Missing id!'}
+        )
+    
+    post = post_service.get_post_by_id(session, post_id)
+
+    if not post:
+        raise HTTPException(
+            status_code = status.HTTP_404_NOT_FOUND, 
+            detail = {'error': 'Post does not exist!'}
+        )
+    
+    post_service.delete_post(session, post)
+    
+    return {'message': 'Post deleted successfully.'}
