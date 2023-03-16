@@ -29,3 +29,7 @@ def update_post(session: Session, post_to_update: model.Post, new_post: PostBase
     session.commit()
 
     return post_to_update
+
+def delete_post(session: Session, post: model.Post) -> None:
+    session.delete(post)
+    session.commit()
