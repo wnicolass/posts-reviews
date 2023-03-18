@@ -47,3 +47,14 @@ async def get_reviews(post_id: int, session: Session = Depends(get_db_session)) 
     
     post_reviews = review_service.get_all_reviews(session, post_id)
     return post_reviews
+
+@router.patch("/reviews/{review_id}", status_code = status.HTTP_200_OK)
+async def update_review(review_id: int, new_review: ReviewBase, session: Session = Depends(get_db_session)) -> ReviewResult:
+    if not review_id:
+        raise HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST, 
+            detail = {'error': 'Missing id.'}
+        )
+    
+    updated_review = review_service.update_review(session, review_id, new_review)
+    return updated_review
