@@ -32,7 +32,7 @@ def update_review(session: Session, review_id: int, new_data: ReviewBase) -> mod
     
     return db_review
 
-def delete_review(session: Session, review_id) -> None:
-    review_to_delete = get_post_by_id(session, review_id)
+def delete_review(session: Session, review_id: int) -> None:
+    review_to_delete = get_review_by_id(session, review_id)
     session.delete(review_to_delete)
     session.commit()

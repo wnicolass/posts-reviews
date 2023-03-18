@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from schemas.review import ReviewBase, ReviewResult
 from utils.db_session import get_db_session
 from services import review_service, post_service
+from models.review import Review
 
 router = APIRouter()
 
@@ -58,3 +59,15 @@ async def update_review(review_id: int, new_review: ReviewBase, session: Session
     
     updated_review = review_service.update_review(session, review_id, new_review)
     return updated_review
+
+@router.delete("/reviews/{review_id}", status_code = status.HTTP_200_OK)
+async def delete_review(review_id: int, session: Session = Depends(get_db_session)) -> dict:
+    if not review_id:
+        raise HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST, 
+            detail = {'error': 'Missing id.'}
+        )
+    
+    review_service.delete_review(session, review_id)
+    
+    return {'message': 'Review deleted successfully.'}
