@@ -16,3 +16,6 @@ def create_review(session: Session, review_sch: ReviewBase, post_id: int) -> mod
     session.commit()
     session.refresh(db_review)
     return db_review
+
+def get_all_reviews(session: Session, post_id: int) -> List[model.Review]:
+    return session.query(model.Review).where(model.Review.post_id == post_id).all()
