@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from typing import List
-import models.post as model
+import models.review as model
 from schemas.review import ReviewBase
 from services.post_service import get_post_by_id
 
@@ -19,3 +19,12 @@ def create_review(session: Session, review_sch: ReviewBase, post_id: int) -> mod
 
 def get_all_reviews(session: Session, post_id: int) -> List[model.Review]:
     return session.query(model.Review).where(model.Review.post_id == post_id).all()
+
+def update_review(session: Session, review_id: int, new_data: ReviewBase) -> model.Review:
+    db_review = session.query(model.Review).filter(model.Review.id == review_id).one_or_none()
+    db_review.rating = new_data.rating
+    db_review.content = new_data.content
+    
+    session.commit()
+    
+    return db_review
