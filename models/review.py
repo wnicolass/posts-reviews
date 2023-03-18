@@ -19,4 +19,4 @@ class Review(Base):
     post_id = Column(Integer, ForeignKey('posts.id', ondelete = 'CASCADE'))
     created_at = Column(DateTime, default = datetime.now())
 
-    post = relationship('Post', back_populates = 'related_reviews', cascade = 'delete')
+    post = relationship('Post', back_populates = 'related_reviews')
