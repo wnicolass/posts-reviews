@@ -18,4 +18,4 @@ class Post(Base):
     content = Column(String(255), nullable = False)
     created_at = Column(DateTime, default = datetime.now())
 
-    related_reviews = relationship('Review', back_populates = 'post')
+    related_reviews = relationship('Review', back_populates = 'post', cascade = 'delete')
