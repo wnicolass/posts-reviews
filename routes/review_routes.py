@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 from schemas.review import ReviewBase, ReviewResult
-from utils.db_session import get_db_session
+from common.db_session import get_db_session
 from services import review_service, post_service
 from models.review import Review
 
