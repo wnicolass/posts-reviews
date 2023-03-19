@@ -1,19 +1,19 @@
 from fastapi import FastAPI
-from views import review_routes, post_routes
+from views import (review, post)
 from config.database import create_metadata
 
 app = FastAPI()
 
-app.include_router(post_routes.router)
-app.include_router(review_routes.router)
+app.include_router(post.router)
+app.include_router(review.router)
 
 def main():
     # config_routes()
     start_uvicorn()
 
 # def config_routes():
-#     for rtr in [review_routes, post_routes]:
-#         app.include_router(rtr.router)
+#     for view in [post, review]:
+#         app.include_router(view.router)
 
 def start_uvicorn():
     import uvicorn
