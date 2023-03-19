@@ -23,7 +23,7 @@ def start_uvicorn():
 A Web accessible FastAPI server that allow reviewers to review posts.
 
 Usage:
-  app.py [-c | -c -d] [-p PORT] [-h HOST_IP] [-r]
+  app.py [-c] [-p PORT] [-h HOST_IP] [-r]
 
 Options:
   -p PORT, --port=PORT                 Listen on this port [default: 8000]
