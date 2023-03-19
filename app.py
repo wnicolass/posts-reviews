@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import review_routes, post_routes
+from views import review_routes, post_routes
 from config.database import create_metadata
 
 app = FastAPI()
