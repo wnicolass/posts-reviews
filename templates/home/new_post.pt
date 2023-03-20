@@ -2,6 +2,9 @@
 <__additional_stylesheet__ metal:fill-slot="additional_css" tal:omit-tag="True">
     <link rel="stylesheet" href="../../static/styles/new-post.css" />
 </__additional_stylesheet__>
+<__additional_script__ metal:fill-slot="additional_script" tal:omit-tag="True">
+  <script src="../../static/scripts/app.js" defer></script>
+</__additional_script__>
 <__content__ metal:fill-slot="content" tal:omit-tag="True">
       <main>
         <form action="/posts/new" method="POST">
