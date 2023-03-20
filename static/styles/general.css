@@ -1,0 +1,43 @@
+/* -------- RESET ------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* -------- GENERAL ------- */
+body {
+  background-color: #f7f8fd;
+  font-family: "Poppins", sans-serif;
+}
+
+body a {
+  color: #373f6a;
+  text-decoration: none;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.wrapper header {
+  text-align: center;
+  color: #373f6a;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: #ae1ee8;
+  padding: 0.5rem;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+footer {
+  text-align: center;
+}
