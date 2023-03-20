@@ -55,3 +55,38 @@ footer {
 i {
   margin-right: 0.3rem;
 }
+
+#toast {
+  position: absolute;
+  top: 35px;
+  right: 20px;
+
+  background-color: #ffffff;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 20rem;
+  border-radius: 5px;
+}
+
+#toast .alert {
+  margin: 0;
+  border: 2px solid red;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #f00;
+}
+
+#toast span {
+  margin-left: 0.5rem;
+  color: rgb(255, 38, 0);
+}
+
+#toast .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#toast .close-btn:hover {
+  cursor: pointer;
+}
