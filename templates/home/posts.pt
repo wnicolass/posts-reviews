@@ -42,65 +42,27 @@
 
         <section id="posts">
           <div class="new-post">
-            <p><span>Total posts:</span> $[total]</p>
+            <p><span>Total posts:</span> ${total}</p>
             <a href="/posts/new" class="btn">
               <i class="fa-solid fa-plus"></i>
               Add new post
             </a>
           </div>
           <ul id="posts">
+          <__repeat__ tal:repeat="post posts" tal:omit-tag="True">
             <li>
               <div class="post-info">
-                <h3><a href="#">Some random title</a></h3>
-                <p>Random content</p>
+                <h3><a href="/posts/detail/${post.id}">${post.title}</a></h3>
+                <p>${post.summary}</p>
               </div>
               <div class="post-actions">
-                <a href="#" class="btn">
+                <a href="/posts/detail/${post.id}" class="btn">
                   <i class="fa-solid fa-comments"></i>
                   Details
                 </a>
               </div>
             </li>
-
-            <li>
-              <div class="post-info">
-                <h3><a href="#">Some random title</a></h3>
-                <p>Random content</p>
-              </div>
-              <div class="post-actions">
-                <a href="#" class="btn">Details</a>
-              </div>
-            </li>
-
-            <li>
-              <div class="post-info">
-                <h3><a href="#">Some random title</a></h3>
-                <p>Random content</p>
-              </div>
-              <div class="post-actions">
-                <a href="#" class="btn">Details</a>
-              </div>
-            </li>
-
-            <li>
-              <div class="post-info">
-                <h3><a href="#">Some random title</a></h3>
-                <p>Random content</p>
-              </div>
-              <div class="post-actions">
-                <a href="#" class="btn">Details</a>
-              </div>
-            </li>
-
-            <li>
-              <div class="post-info">
-                <h3><a href="#">Some random title</a></h3>
-                <p>Random content</p>
-              </div>
-              <div class="post-actions">
-                <a href="#" class="btn">Details</a>
-              </div>
-            </li>
+          </__repeat__>
           </ul>
         </section>
       </main>

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi_chameleon import template
 from typing import List
 from sqlalchemy.orm import Session
 
@@ -19,9 +20,10 @@ async def create_post(post: PostBase, session: Session = Depends(get_db_session)
     return inserted_data
 
 @router.get('/posts', status_code = status.HTTP_200_OK)
-async def get_posts(session: Session = Depends(get_db_session)) -> List[PostResult]:
+@template(template_file = 'home/posts.pt')
+async def get_posts(session: Session = Depends(get_db_session)) -> dict:
     posts = post_service.get_posts(session)
-    return posts
+    return {'posts': posts, 'total': len(posts)}
 
 @router.put('/posts/{post_id}', response_model = PostResult, status_code = status.HTTP_200_OK)
 async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)):
