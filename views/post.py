@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, Request, status, HTTPException, responses
 from fastapi_chameleon import template
 from typing import List
 from sqlalchemy.orm import Session
@@ -9,15 +9,29 @@ from services import post_service
 
 router = APIRouter()
 
-@router.post('/posts', response_model = PostResult, status_code = status.HTTP_201_CREATED)
-async def create_post(post: PostBase, session: Session = Depends(get_db_session)):
+@router.get('/posts/new', status_code = status.HTTP_200_OK)
+@template(template_file = 'home/new_post.pt')
+async def new_post():
+    return {}
+
+@router.post('/posts/new', status_code = status.HTTP_201_CREATED)
+async def create_post(request: Request, session: Session = Depends(get_db_session)):
+    form_data = await request.form()
+    post = PostBase(
+        title = form_data['title'],
+        summary = form_data['summary'],
+        content = form_data['content']
+    )
+    
     inserted_data = post_service.create_post(post, session)
     if not inserted_data:
         raise HTTPException(
             status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, 
             detail = {'error': 'Something went wrong while connecting to the database.'}
         )
-    return inserted_data
+    
+    response = responses.RedirectResponse(url = '/posts', status_code = status.HTTP_302_FOUND)
+    return response
 
 @router.get('/posts', status_code = status.HTTP_200_OK)
 @template(template_file = 'home/posts.pt')
