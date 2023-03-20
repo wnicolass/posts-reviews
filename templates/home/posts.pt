@@ -1,0 +1,47 @@
+<layout metal:use-macro="load: ../shared/_layout.pt">
+<__additional_stylesheet__ metal:fill-slot="additional_css" tal:omit-tag="True">
+    <link rel="stylesheet" href="../../static/styles/posts.css" />
+</__additional_stylesheet__>
+<__content__ metal:fill-slot="content" tal:omit-tag="True">
+      <main>
+        <section class="heading">
+          <h2>Simple Blog</h2>
+          <p>
+            Based on
+            <a
+              href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6"
+              target="_blank"
+              >This</a
+            >
+            Frontend Mentor challenge.
+          </p>
+        </section>
+
+        <section id="posts">
+          <div class="new-post">
+            <p><span>Total posts:</span> ${total}</p>
+            <a href="/posts/new" class="btn">
+              <i class="fa-solid fa-plus"></i>
+              Add new post
+            </a>
+          </div>
+          <ul id="posts">
+          <__repeat__ tal:repeat="post posts" tal:omit-tag="True">
+            <li>
+              <div class="post-info">
+                <h3><a href="/posts/detail/${post.id}">${post.title}</a></h3>
+                <p>${post.summary}</p>
+              </div>
+              <div class="post-actions">
+                <a href="/posts/detail/${post.id}" class="btn">
+                  <i class="fa-solid fa-comments"></i>
+                  Details
+                </a>
+              </div>
+            </li>
+          </__repeat__>
+          </ul>
+        </section>
+      </main>
+      </__content__>
+</layout>

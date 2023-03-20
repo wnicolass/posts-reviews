@@ -1,15 +1,18 @@
 from fastapi import FastAPI
+from fastapi_chameleon import global_init
+from fastapi.staticfiles import StaticFiles
 from views import (review, post)
 from config.database import create_metadata
 
 app = FastAPI()
 
+def main():
+    start_uvicorn()
+
+app.mount('/static', StaticFiles(directory = 'static'), name = 'static')
 app.include_router(post.router)
 app.include_router(review.router)
-
-def main():
-    # config_routes()
-    start_uvicorn()
+global_init('./templates')
 
 # def config_routes():
 #     for view in [post, review]:
@@ -41,6 +44,10 @@ Options:
         port = int(args['--port']),
         host = args['--host'],
         reload = args['--reload'],
+        reload_includes=[
+            '*.pt',
+            '*.css',
+        ]
     )
 
 if __name__ == '__main__':

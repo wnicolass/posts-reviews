@@ -1,27 +1,72 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, Request, status, HTTPException, responses
+from fastapi_chameleon import template
 from typing import List
 from sqlalchemy.orm import Session
 
 from schemas.post import PostBase, PostResult
 from common.db_session import get_db_session
 from services import post_service
+from common.viewmodel import ViewModel
 
 router = APIRouter()
 
-@router.post('/posts', response_model = PostResult, status_code = status.HTTP_201_CREATED)
-async def create_post(post: PostBase, session: Session = Depends(get_db_session)):
-    inserted_data = post_service.create_post(post, session)
-    if not inserted_data:
-        raise HTTPException(
-            status_code = status.HTTP_500_INTERNAL_SERVER_ERROR, 
-            detail = {'error': 'Something went wrong while connecting to the database.'}
-        )
-    return inserted_data
+@router.get('/posts/new', status_code = status.HTTP_200_OK)
+@template(template_file = 'home/new_post.pt')
+async def new_post():
+    return new_post_viewmodel()
+
+def new_post_viewmodel():
+    return ViewModel()
+
+@router.post('/posts/new', status_code = status.HTTP_201_CREATED)
+@template(template_file = 'home/new_post.pt')
+async def create_post(request: Request, session: Session = Depends(get_db_session)):
+    vm = await create_post_viewmodel(request, session)
+    
+    if vm.error:
+        return vm
+
+    response = responses.RedirectResponse(url = '/posts', status_code = status.HTTP_302_FOUND)
+    return response
+
+async def create_post_viewmodel(request: Request, session: Session = Depends(get_db_session)):
+    form_data = await request.form()
+    post = PostBase(
+        title = form_data['title'],
+        summary = form_data['summary'],
+        content = form_data['content']
+    )
+
+    vm = ViewModel(
+        title = post.title,
+        summary = post.summary,
+        content = post.summary
+    )
+
+    if len(vm.title.strip()) == 0:
+        vm.error, vm.error_msg = True, "Title cannot be empty."
+    
+    if not vm.error:
+        inserted_data = post_service.create_post(post, session)
+    
+    return vm
 
 @router.get('/posts', status_code = status.HTTP_200_OK)
-async def get_posts(session: Session = Depends(get_db_session)) -> List[PostResult]:
+@template(template_file = 'home/posts.pt')
+async def get_posts(session: Session = Depends(get_db_session)) -> dict:
+    return get_posts_viewmodel(session)
+
+def get_posts_viewmodel(session: Session):
     posts = post_service.get_posts(session)
-    return posts
+
+    vm = ViewModel(
+        posts = posts, 
+        total = len(posts)
+    )
+
+    print(vm)
+
+    return vm
 
 @router.put('/posts/{post_id}', response_model = PostResult, status_code = status.HTTP_200_OK)
 async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)):
