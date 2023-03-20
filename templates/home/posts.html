@@ -5,43 +5,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../../static/styles/general.css" />
+    <link rel="stylesheet" href="../../static/styles/posts.css" />
   </head>
   <body>
-    <header>
-      <h1>Imagine an amazing header here.</h1>
-    </header>
-    <main>
-      <div class="heading">
-        <h2>Simple Blog</h2>
-        <p>
-          Based on
-          <a
-            href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6"
-            >This</a
-          >
-          Frontend Mentor challenge.
-        </p>
-      </div>
-      <ul id="posts">
-        <li>
-          <h3>Some random title</h3>
-          <p>Random content</p>
-        </li>
+    <div class="wrapper">
+      <header>
+        <h1>Imagine an amazing header here.</h1>
+      </header>
+      <main>
+        <section class="heading">
+          <h2>Simple Blog</h2>
+          <p>
+            Based on
+            <a
+              href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6"
+              target="_blank"
+              >This</a
+            >
+            Frontend Mentor challenge.
+          </p>
+        </section>
 
-        <li>
-          <h3>Some random title</h3>
-          <p>Random content</p>
-        </li>
+        <section id="posts">
+          <div class="new-post">
+            <p><span>Total posts:</span> $[total]</p>
+            <a href="/posts/new" class="btn">
+              <i class="fa-solid fa-plus"></i>
+              Add new post
+            </a>
+          </div>
+          <ul id="posts">
+            <li>
+              <div class="post-info">
+                <h3><a href="#">Some random title</a></h3>
+                <p>Random content</p>
+              </div>
+              <div class="post-actions">
+                <a href="#" class="btn">Details</a>
+              </div>
+            </li>
 
-        <li>
-          <h3>Some random title</h3>
-          <p>Random content</p>
-        </li>
-      </ul>
-    </main>
-    <footer>
-      <small>Made with a keyboard.</small>
-    </footer>
+            <li>
+              <div class="post-info">
+                <h3><a href="#">Some random title</a></h3>
+                <p>Random content</p>
+              </div>
+              <div class="post-actions">
+                <a href="#" class="btn">Details</a>
+              </div>
+            </li>
+
+            <li>
+              <div class="post-info">
+                <h3><a href="#">Some random title</a></h3>
+                <p>Random content</p>
+              </div>
+              <div class="post-actions">
+                <a href="#" class="btn">Details</a>
+              </div>
+            </li>
+
+            <li>
+              <div class="post-info">
+                <h3><a href="#">Some random title</a></h3>
+                <p>Random content</p>
+              </div>
+              <div class="post-actions">
+                <a href="#" class="btn">Details</a>
+              </div>
+            </li>
+
+            <li>
+              <div class="post-info">
+                <h3><a href="#">Some random title</a></h3>
+                <p>Random content</p>
+              </div>
+              <div class="post-actions">
+                <a href="#" class="btn">Details</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <small>Made with a keyboard.</small>
+      </footer>
+    </div>
   </body>
 </html>
