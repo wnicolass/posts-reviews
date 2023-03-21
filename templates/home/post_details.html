@@ -91,6 +91,7 @@
       <section id="new-review">
         <form action="/reviews" method="POST">
           <h2>Add Review</h2>
+          <input type="hidden" value="$[post_id}" />
           <div class="input-group">
             <label for="rating">Rating</label>
             <input type="number" name="rating" min="0" max="5" step="0.1" />
