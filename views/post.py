@@ -7,6 +7,7 @@ from schemas.post import PostBase, PostResult
 from common.db_session import get_db_session
 from services import post_service
 from common.viewmodel import ViewModel
+from common.utils import form_field_as_str
 
 router = APIRouter()
 
@@ -31,23 +32,24 @@ async def create_post(request: Request, session: Session = Depends(get_db_sessio
 
 async def create_post_viewmodel(request: Request, session: Session = Depends(get_db_session)):
     form_data = await request.form()
-    post = PostBase(
-        title = form_data['title'],
-        summary = form_data['summary'],
-        content = form_data['content']
-    )
 
     vm = ViewModel(
-        title = post.title,
-        summary = post.summary,
-        content = post.summary
+        title = form_field_as_str(form_data, 'title'),
+        summary = form_field_as_str(form_data, 'summary'),
+        content = form_field_as_str(form_data, 'content')
     )
 
-    if len(vm.title.strip()) == 0:
-        vm.error, vm.error_msg = True, "Title cannot be empty."
+    if len(vm.title.strip()) < 2:
+        vm.error, vm.error_msg = True, "Title must has at least 2 characters."
+    elif len(vm.content.strip()) < 5: 
+        vm.error, vm.error_msg = True, "Content must has at least 5 characters."
     
     if not vm.error:
-        inserted_data = post_service.create_post(post, session)
+        post_service.create_post(PostBase(
+            title = vm.title,
+            summary = vm.content,
+            content = vm.content
+        ), session)
     
     return vm
 
@@ -63,8 +65,6 @@ def get_posts_viewmodel(session: Session):
         posts = posts, 
         total = len(posts)
     )
-
-    print(vm)
 
     return vm
 
