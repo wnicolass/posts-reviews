@@ -1,0 +1,17 @@
+#post {
+  background-color: #fff;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#post .post-content p {
+  color: #909196;
+}
+
+#post i {
+  color: #eceffd;
+  font-size: 1.3rem;
+}
