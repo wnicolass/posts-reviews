@@ -55,7 +55,7 @@ async def create_post_viewmodel(request: Request, session: Session = Depends(get
 
 @router.get('/posts', status_code = status.HTTP_200_OK)
 @template(template_file = 'home/posts.pt')
-async def get_posts(session: Session = Depends(get_db_session)) -> dict:
+async def get_posts(session: Session = Depends(get_db_session)) -> ViewModel:
     return get_posts_viewmodel(session)
 
 def get_posts_viewmodel(session: Session):
@@ -67,6 +67,21 @@ def get_posts_viewmodel(session: Session):
     )
 
     return vm
+
+@router.get('/posts/{post_id}', status_code = status.HTTP_200_OK)
+@template(template_file = 'home/post_details.pt')
+async def post_details(post_id: int, session: Session = Depends(get_db_session)):
+    return post_details_viewmodel(post_id, session)
+
+def post_details_viewmodel(post_id, session: Session = Depends(get_db_session)):
+    post = post_service.get_post_by_id(session, post_id)
+
+    vm = ViewModel(
+        post = post
+    )
+
+    return vm
+
 
 @router.put('/posts/{post_id}', response_model = PostResult, status_code = status.HTTP_200_OK)
 async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)):

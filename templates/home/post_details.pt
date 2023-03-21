@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Post Details</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../../static/styles/general.css" />
-    <link rel="stylesheet" href="../../static/styles/post-details.css" />
-  </head>
-  <body>
+<layout metal:use-macro="load: ../shared/_layout.pt">
+    <__additional_stylesheet__ metal:fill-slot="additional_css" tal:omit-tag="True">
+        <link rel="stylesheet" href="../../static/styles/post-details.css" />
+    </__additional_stylesheet__>
+    <__additional_script__ metal:fill-slot="additional_script" tal:omit-tag="True">
+      <script src="../../static/scripts/app.js" defer></script>
+    </__additional_script__>
+    <__content__ metal:fill-slot="content" tal:omit-tag="True">
     <main>
       <div id="post">
         <div class="post-content">
@@ -107,16 +93,5 @@
         </form>
       </section>
     </main>
-  </body>
-</html>
-
-<!-- <layout metal:use-macro="load: ../shared/_layout.pt">
-<__additional_stylesheet__ metal:fill-slot="additional_css" tal:omit-tag="True">
-    <link rel="stylesheet" href="../../static/styles/posts.css" />
-</__additional_stylesheet__>
-<__content__ metal:fill-slot="content" tal:omit-tag="True">
-      <main>
-        
-      </main>
-      </__content__>
-</layout> -->
+</__content__>
+</layout>

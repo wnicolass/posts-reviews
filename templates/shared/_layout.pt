@@ -35,9 +35,9 @@
       <div metal:define-slot="content" tal:omit-tag="True">
         No content
       </div>
-</div>
-<footer>
-      <small>Made with a keyboard.</small>
-    </footer>
+    </div>
+    <footer>
+          <small>Made with a keyboard.</small>
+        </footer>
 </body>
 </html>
