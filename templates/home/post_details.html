@@ -34,7 +34,7 @@
             <article>
               <div class="review-header">
                 <h3>Username</h3>
-                <span class="rating">5.2</span>
+                <span class="rating"><i class="fa-solid fa-star"></i> 5.2</span>
               </div>
               <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -87,6 +87,23 @@
             </article>
           </li>
         </ul>
+      </section>
+      <section id="new-review">
+        <form action="/reviews" method="POST">
+          <h2>Add Review</h2>
+          <div class="input-group">
+            <label for="rating">Rating</label>
+            <input type="number" name="rating" min="0" max="5" step="0.1" />
+          </div>
+          <div class="input-group">
+            <label for="content">Review content</label>
+            <textarea name="content" id="content"></textarea>
+          </div>
+          <div class="input-group">
+            <span>250 Characters left</span>
+            <button class="btn">Post review</button>
+          </div>
+        </form>
       </section>
     </main>
   </body>

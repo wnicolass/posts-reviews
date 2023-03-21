@@ -5,13 +5,93 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  border-radius: 5px;
 }
 
-#post .post-content p {
+p {
   color: #909196;
+}
+
+h2,
+.review-header {
+  color: #373f6a;
 }
 
 #post i {
   color: #eceffd;
   font-size: 1.3rem;
+}
+
+#reviews {
+  margin-block: 2rem;
+  background-color: #fff;
+  padding: 1rem;
+
+  border-radius: 5px;
+}
+
+#reviews ul {
+  list-style-type: none;
+}
+
+#reviews ul li {
+  border-bottom: 2px solid #dfe0e5;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+#reviews ul li article .review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 0.5rem;
+}
+
+#new-review {
+  padding: 1rem;
+  background-color: #fff;
+  width: 100%;
+}
+
+#new-review form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#new-review form .input-group:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+#new-review form .input-group:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#new-review form .input-group:last-child span {
+  color: #909196;
+  font-size: 0.8rem;
+}
+
+#new-review form input {
+  width: 3.5rem;
+}
+
+#new-review form input,
+#new-review form textarea {
+  background-color: #f7f8fd;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+
+  font-family: inherit;
+}
+
+#new-review form textarea {
+  width: 100%;
+  height: 4rem;
+  resize: none;
+  margin-top: 0.5rem;
 }
