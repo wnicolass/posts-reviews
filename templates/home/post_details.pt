@@ -1,0 +1,55 @@
+<layout metal:use-macro="load: ../shared/_layout.pt">
+    <__additional_stylesheet__ metal:fill-slot="additional_css" tal:omit-tag="True">
+        <link rel="stylesheet" href="../../static/styles/post-details.css" />
+    </__additional_stylesheet__>
+    <__additional_script__ metal:fill-slot="additional_script" tal:omit-tag="True">
+      <script src="../../static/scripts/app.js" defer></script>
+    </__additional_script__>
+    <__content__ metal:fill-slot="content" tal:omit-tag="True">
+    <main>
+      <div id="post">
+        <div class="post-content">
+          <h2>${post.title}</h2>
+          <p>${post.content}</p>
+        </div>
+        <p><i class="fa-solid fa-comments"></i>${total_reviews}</p>
+      </div>
+      <section id="reviews">
+        <ul>
+        <__repeat__ tal:condition="reviews" tal:repeat="review reviews" tal:omit-tag="True">
+          <li>
+            <article>
+              <div class="review-header">
+                <h3>Username</h3>
+                <span class="rating"><i class="fa-solid fa-star"></i> ${review.rating}</span>
+              </div>
+              <p>
+                ${review.content}
+              </p>
+            </article>
+          </li>
+        </__repeat__>
+        <h2 tal:condition="not reviews">No reviews yet - Maybe start by adding some?</h2>
+        </ul>
+      </section>
+      <section id="new-review">
+        <form action="/reviews" method="POST">
+          <h2>Add Review</h2>
+          <input type="hidden" value="${post.id}" name="post_id" />
+          <div class="input-group">
+            <label for="rating">Rating</label>
+            <input type="number" name="rating" min="0" max="5" step="0.1" />
+          </div>
+          <div class="input-group">
+            <label for="content">Review content</label>
+            <textarea name="content" id="content"></textarea>
+          </div>
+          <div class="input-group">
+            <span>250 Characters left</span>
+            <button class="btn">Post review</button>
+          </div>
+        </form>
+      </section>
+    </main>
+</__content__>
+</layout>
