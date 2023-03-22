@@ -77,7 +77,9 @@ def post_details_viewmodel(post_id, session: Session = Depends(get_db_session)):
     post = post_service.get_post_by_id(session, post_id)
 
     vm = ViewModel(
-        post = post
+        post = post,
+        reviews = post.related_reviews,
+        total_reviews = len(post.related_reviews)
     )
 
     return vm
