@@ -45,8 +45,8 @@ body a {
   cursor: pointer;
 }
 
-footer {
-  text-align: center;
+main {
+  padding-bottom: 2rem;
 }
 
 i {

@@ -28,13 +28,13 @@
   <span>${error_msg}</span>
   <i class="fa-solid fa-xmark close-btn"></i>
 </div>
-<div class="wrapper">
-      <header>
-        <h1>Imagine an amazing header here.</h1>
-      </header>
-      <div metal:define-slot="content" tal:omit-tag="True">
-        No content
-      </div>
+  <div class="wrapper">
+    <header>
+      <h1>Imagine an amazing header here.</h1>
+    </header>
+    <div metal:define-slot="content" tal:omit-tag="True">
+      No content
     </div>
+  </div>
 </body>
 </html>
