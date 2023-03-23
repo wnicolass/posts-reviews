@@ -1,16 +1,7 @@
-const toastElement = document.getElementById("toast");
-
-function removeToast() {
-  toastElement.remove();
-}
+import { checkToastPresence } from "./modules/toast";
 
 function main() {
-  if (toastElement) {
-    const closeBtn = toastElement.lastElementChild;
-    setTimeout(removeToast, 5000);
-
-    closeBtn.addEventListener("click", removeToast);
-  }
+  checkToastPresence();
 }
 
 main();

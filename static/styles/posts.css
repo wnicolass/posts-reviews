@@ -68,3 +68,7 @@
   margin-block: 1rem;
   padding: 1rem;
 }
+
+#posts .post-actions a:last-child {
+  margin-inline: 0.5rem;
+}
