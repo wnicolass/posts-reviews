@@ -14,7 +14,7 @@ async function updatePost() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify({ post }),
     });
 
     if (!res.ok) {
