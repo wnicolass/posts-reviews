@@ -37,6 +37,9 @@
                   <i class="fa-solid fa-comments"></i>
                   Details
                 </a>
+                <a href="/posts/edit/${post.id}" class="btn">
+                <i class="fa-solid fa-pen"></i>
+                </a>
               </div>
             </li>
           </__repeat__>
