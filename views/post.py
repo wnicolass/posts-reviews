@@ -84,9 +84,21 @@ def post_details_viewmodel(post_id, session: Session = Depends(get_db_session)):
 
     return vm
 
+@router.get('/posts/edit/{post_id}')
+@template(template_file = 'home/update_post.pt')
+async def get_post_edit(post_id: int, session: Session = Depends(get_db_session)) -> ViewModel:
+    return get_post_edit_viewmodel(post_id, session)
 
-@router.put('/posts/{post_id}', response_model = PostResult, status_code = status.HTTP_200_OK)
-async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)):
+def get_post_edit_viewmodel(post_id: int, session: Session = Depends(get_db_session)) -> ViewModel:
+    post = post_service.get_post_by_id(session, post_id)
+
+    vm = ViewModel(post = post)
+
+    return vm
+
+
+@router.put('/posts/edit/{post_id}', status_code = status.HTTP_200_OK)
+async def update_post(post_id: int, new_post_data: PostBase, session: Session = Depends(get_db_session)) -> PostResult:
     if not post_id:
         raise HTTPException(
             status_code = status.HTTP_400_BAD_REQUEST, 
